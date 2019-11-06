@@ -1,0 +1,51 @@
+.bg{
+  background: url("src/img/wallpapersden.jpg");
+
+  /* Half height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1{
+  position: center;
+  color: wheat;
+}
+.square{
+  /*height: 20px;*/
+  /*width: 20px;*/
+  /*background-color: white;*/
+  margin: 0;
+  padding: 0;
+  width: calc(5vmin - 1px);
+  height: calc(5vmin - 1px);
+  border: 1px solid #aaa;
+  background-color: #eee;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.wrapperBlock{
+  margin: 3px auto;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  width: calc(50vmin - 5px);
+  height: calc(50vmin - 5px);
+  border: 2px solid #333;
+}
+.blockSelect{
+  margin: 9px auto;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  width: calc(50vmin - 5px);
+  height: calc(20vmin - 5px);
+  border: 2px solid #333;
+  background-color: #eee;
+}
+.btnReserve{
+  width: calc(50vmin - 5px);
+  margin: 9px auto;
+
+}

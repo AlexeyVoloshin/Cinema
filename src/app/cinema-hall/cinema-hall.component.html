@@ -1,0 +1,22 @@
+<div class="bg">
+  <div class="container">
+    <h1>Screen</h1>
+    <div class="wrapperBlock" >
+      <div *ngFor="let data of places">
+              <div class="square" (click)="onClick($event)">{{ data._id}}</div>
+      </div>
+    </div>
+    <div *ngIf="select">
+      <div class="blockSelect">
+        <div *ngFor="let data of select">
+            {{'Row: ' + data.row + ' ' + 'Place: ' + data.place}}
+          <button class="delete" title="delete selectPlace"
+          (click)="delete(data)">x</button>
+        </div>
+      </div>
+      <div class="btnReserve">
+        <app-payment [selectPlace]="select"></app-payment>
+      </div>
+    </div>
+  </div>
+</div>

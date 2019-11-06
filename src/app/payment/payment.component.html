@@ -1,0 +1,14 @@
+<button class="btn bg-info" (click)="addSelected($event)">Reserve</button>
+<div *ngIf="selectPlace">
+  <div class="container-for-map">
+    <div *ngFor="let data of selectPlace">
+      <span style="color: #eeeeee">{{'Row: ' + data?.row + ' ' + 'Place: ' + data?.place}}</span>
+    </div>
+    <label >Name:</label>
+    <input #Name placeholder="Enter Name" class="form-control">
+    <label>Email:</label>
+    <input #Email placeholder="Enter Email" class="form-control" type="password">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit(Name.value, Email.value)">Enter</button>
+
+  </div>
+</div>
