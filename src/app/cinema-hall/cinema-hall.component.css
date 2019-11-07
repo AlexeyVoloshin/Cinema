@@ -9,20 +9,22 @@
   background-size: cover;
 }
 h1{
-  position: center;
   color: wheat;
+  flex-flow: row wrap;
+
 }
 .square{
   /*height: 20px;*/
   /*width: 20px;*/
   /*background-color: white;*/
+  display: flex;
+  align-items: flex-start;
   margin: 0;
   padding: 0;
   width: calc(5vmin - 1px);
   height: calc(5vmin - 1px);
   border: 1px solid #aaa;
-  /*background-color: #eee;*/
-  /*background-color: rgba(0,0,0,0.5);*/
+  background-color: rgba(0,0,0,0.5);
   background-size: cover;
   box-sizing: border-box;
   color: rgba(0,0,0,0);;
@@ -55,8 +57,8 @@ h1{
 }
 
 .SelectedSeat{
-  width: 5px;
-  height: 5px;
+  Flex-basis: 200px;
+  align-self: center;
   background-color: cornflowerblue;
 
 }

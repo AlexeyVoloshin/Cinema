@@ -9,7 +9,7 @@ import { Place } from '../model/place';
 
 export class CinemaHallComponent implements OnInit {
   places: Place[] = [];
-  select: Array<Place> = [];
+  select: Place[] = [];
   isShow: boolean = false;
   calc: number = 0;
   color = 'red';
