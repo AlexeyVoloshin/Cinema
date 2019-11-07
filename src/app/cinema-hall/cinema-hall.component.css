@@ -21,9 +21,11 @@ h1{
   width: calc(5vmin - 1px);
   height: calc(5vmin - 1px);
   border: 1px solid #aaa;
-  background-color: #eee;
+  /*background-color: #eee;*/
+  /*background-color: rgba(0,0,0,0.5);*/
   background-size: cover;
   box-sizing: border-box;
+  color: rgba(0,0,0,0);;
 }
 .wrapperBlock{
   margin: 3px auto;
@@ -42,10 +44,23 @@ h1{
   width: calc(50vmin - 5px);
   height: calc(20vmin - 5px);
   border: 2px solid #333;
-  background-color: #eee;
+  /*background-color: #eee;*/
+  background-color: rgba(0,0,0,0.5);
+  color: white;
 }
 .btnReserve{
   width: calc(50vmin - 5px);
   margin: 9px auto;
+
+}
+
+.SelectedSeat{
+  width: 5px;
+  height: 5px;
+  background-color: cornflowerblue;
+
+}
+.unSelectedSeat{
+  background-color: gray;
 
 }

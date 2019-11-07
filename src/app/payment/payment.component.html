@@ -1,6 +1,6 @@
 <button class="btn bg-info" (click)="addSelected($event)">Reserve</button>
 <div *ngIf="selectPlace">
-  <div class="container-for-map">
+  <div class="container-for-map blockSelected">
     <div *ngFor="let data of selectPlace">
       <span style="color: #eeeeee">{{'Row: ' + data?.row + ' ' + 'Place: ' + data?.place}}</span>
     </div>

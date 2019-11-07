@@ -1,3 +1,7 @@
 label{
   color: #eeeeee;
 }
+.blockSelected{
+  display: flex;
+  flex-flow: row wrap;
+}
