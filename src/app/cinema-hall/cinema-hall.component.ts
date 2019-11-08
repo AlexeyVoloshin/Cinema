@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Place } from '../model/place';
+import {PlaceService} from '../services/place.service';
 
 @Component({
   selector: 'app-cinema-hall',
@@ -13,22 +14,28 @@ export class CinemaHallComponent implements OnInit {
   isShow: boolean = false;
   calc: number = 0;
   color = 'red';
-  constructor() { }
+  constructor(private placeService: PlaceService) { }
   placeAndRow() {
-    for ( let r = 1; r < 11; r++) {
-      for ( let p = 1; p < 11; p++) {
-        this.places.push({
-          _id : this.calc ++,
-          row : r,
-          place : p,
-          select : false,
-        });
-      }
-    }
+    // for ( let r = 1; r < 11; r++) {
+    //   for ( let p = 1; p < 11; p++) {
+    //     this.places.push({
+    //       _id : this.calc ++,
+    //       row : r,
+    //       place : p,
+    //       select : false,
+    //     });
+    //   }
+    // }
+    debugger
+    this.placeService.getPlace().subscribe((data: string) => {
+      console.log('place', data);
+
+    });
     console.log('place', this.places);
   }
   ngOnInit() {
-    this.placeAndRow();
+     this.placeAndRow();
+
   }
   onClick(event) {
     const id = +event.target.innerText;
