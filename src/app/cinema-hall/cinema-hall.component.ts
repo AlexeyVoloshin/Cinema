@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Place } from '../model/place';
-import {PlaceService} from '../services/place.service';
+import { PlaceService } from '../services/place.service';
+import { WebsocketService } from '../services/websocket.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-cinema-hall',
@@ -9,57 +11,52 @@ import {PlaceService} from '../services/place.service';
 })
 
 export class CinemaHallComponent implements OnInit {
-  places: Place[] = [];
-  select: Place[] = [];
+  places: Place[];
+  select: Place[];
   isShow: boolean = false;
-  calc: number = 0;
   color = 'red';
-  constructor(private placeService: PlaceService) { }
-  placeAndRow() {
-    // for ( let r = 1; r < 11; r++) {
-    //   for ( let p = 1; p < 11; p++) {
-    //     this.places.push({
-    //       _id : this.calc ++,
-    //       row : r,
-    //       place : p,
-    //       select : false,
-    //     });
-    //   }
-    // }
-    debugger
-    this.placeService.getPlace().subscribe((data: string) => {
-      console.log('place', data);
+  constructor(private placeService: PlaceService,
+              private websocketService: WebsocketService) { }
 
-    });
-    console.log('place', this.places);
+  placeAndRow(): void {
+    this.placeService.getPlaces()
+      .subscribe((data) => {
+      this.places = data;
+      console.log('data', this.places);
+      return this.places;
+     });
   }
+
   ngOnInit() {
      this.placeAndRow();
-
   }
-  onClick(event) {
-    const id = +event.target.innerText;
-    if (this.places[id].select) {
-      return;
+
+async onClick(id) {
+    // const id = event; // .target.innerText;
+    const place = await this.websocketService.sendSelected(id).subscribe(res => res);
+    console.log('place', place);
+    if (place === 1) {
+      // return;
     }
-
-
     this.isShow = true;
     this.color = 'grey';
     console.log('id', id);
 
     for (let data of this.places) {
       if (data._id === id) {
+       this.websocketService.saveSelected(data).subscribe( res => {
         this.select.push({
-          _id : data._id,
-          row: data.row,
-          place : data.place,
+          _id : res._id,
+          row: res.row,
+          place : res.place,
           select : true,
+          bought : res.bought,
         });
         this.places[data._id].select = true;
-        console.log('delete', this.places);
-      }
-    }
+       // console.log('delete', this.places);
+      });
+   }
+  }
   }
 
   delete(data: Place) {

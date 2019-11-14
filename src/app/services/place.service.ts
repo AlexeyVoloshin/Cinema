@@ -11,14 +11,15 @@ import { Socket } from 'ngx-socket-io';
 
 export class PlaceService {
   private userUrl = environment.apiUrl;
-  places: Place[];
+   places: Place[];
   constructor(private _http: ApiService, private socket: Socket) {
-  }
-  getPlace() {
-    return this.socket.fromEvent('place');
   }
   getPlaces(): Observable<Place[]> {
     const url = `${this.userUrl}/places`;
-    return this._http.get(url, this.places);
+    return  this._http.get(url);
+  }
+  getPlace(id: string): Observable<Place[]> {
+    const url = `${this.userUrl}/places/${id}`;
+    return  this._http.get(url);
   }
 }
