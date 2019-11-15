@@ -20,7 +20,7 @@ export class CinemaHallComponent implements OnInit {
 
   placeAndRow(): void {
     this.websocketService.getPlaces()
-      .subscribe((data) => {
+      .then((data) => {
       this.places = data;
       console.log('data', this.places);
       return this.places;
@@ -33,11 +33,13 @@ export class CinemaHallComponent implements OnInit {
 
  onClick(id) {
     // const id = event; // .target.innerText;
-  //  const place =  this.websocketService.getPlaces().subscribe();
+  this.websocketService.saveSelected(id);
+   this.placeAndRow();
   //   console.log('place', place);
   //   if (place === 1) {
   //     // return;
   //   }
+
     this.isShow = true;
     this.color = 'grey';
     console.log('id', id);
@@ -70,11 +72,13 @@ export class CinemaHallComponent implements OnInit {
   }
 
   getStatus(_id: any) {
-    // if (this.places[_id].select) {
-    //   return 'selected';
-    // } else if (!this.places[_id].select) {
-    //   return 'unselected';
-    // }
+    for(let val of this.places) {
+      if (val.select) {
+        return 'selected';
+      } else if (!val.select) {
+        return 'unselected';
+      }
+    }
   }
 }
 

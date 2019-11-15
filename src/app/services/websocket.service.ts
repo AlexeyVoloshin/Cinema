@@ -25,17 +25,20 @@ export class WebsocketService {
   //   this.socket.emit(eventName, data);
   // }
   constructor(private socket: Socket) { }
-
-  saveSelected(selected: Place) {
-   return  this.socket.emit('send', selected, res => {
-      console.log('res', res);
-      return res;
-    });
+  saveSelected(id: string) {
+       this.socket.emit('save', id, res => {
+        console.log(res);
+      });
   }
-  getPlaces() {
-       return  this.socket.emit('get', 0, res => {
-         console.log(res);
-       });
+
+ getPlaces(): Promise<Place[]> {
+    return new Promise<Place[]>((resolve => {
+      this.socket.emit('get', 0, res => {
+        console.log(res);
+        resolve( res);
+      });
+    }));
+
   }
 
 

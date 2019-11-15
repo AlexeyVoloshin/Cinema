@@ -5,21 +5,23 @@
       <div *ngFor="let data of places">
           <div class=" square"   (click)="onClick(data._id)" [ngSwitch]="getStatus(data._id)">
                 {{ data._id }}
-<!--            <span *ngSwitchCase="'selected'" class="SelectedSeat btn"></span>-->
+            <span *ngSwitchCase="'selected'" class="SelectedSeat btn"></span>
 <!--                <span *ngSwitchCase="'unselected'" class="btn square unSelectedSeat"></span>-->
           </div>
       </div>
     </div>
     <div *ngIf="isShow">
       <div class="blockSelect">
-        <div *ngFor="let data of select">
-            {{'Row: ' + data.row + ' ' + 'Place: ' + data.place}}
-          <button class="delete" title="delete selectPlace"
-          (click)="delete(data)">x</button>
+        <div *ngFor="let data of places">
+          <div *ngIf="data.select">
+             {{'Row: ' + data.row + ' ' + 'Place: ' + data.place}}
+            <button class="delete" title="delete selectPlace"
+                    (click)="delete(data)">x</button>
+          </div>
         </div>
       </div>
       <div class="btnReserve">
-        <app-payment [selectPlace]="select"></app-payment>
+        <app-payment [selectPlace]="places"></app-payment>
       </div>
     </div>
   </div>
