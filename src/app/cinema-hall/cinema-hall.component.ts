@@ -12,14 +12,14 @@ import { ApiService } from '../services/api.service';
 
 export class CinemaHallComponent implements OnInit {
   places: Place[];
-  select: Place[];
+ // select: Place[];
   isShow: boolean = false;
   color = 'red';
   constructor(private placeService: PlaceService,
               private websocketService: WebsocketService) { }
 
   placeAndRow(): void {
-    this.placeService.getPlaces()
+    this.websocketService.getPlaces()
       .subscribe((data) => {
       this.places = data;
       console.log('data', this.places);
@@ -31,50 +31,50 @@ export class CinemaHallComponent implements OnInit {
      this.placeAndRow();
   }
 
-async onClick(id) {
+ onClick(id) {
     // const id = event; // .target.innerText;
-    const place = await this.websocketService.sendSelected(id).subscribe(res => res);
-    console.log('place', place);
-    if (place === 1) {
-      // return;
-    }
+  //  const place =  this.websocketService.getPlaces().subscribe();
+  //   console.log('place', place);
+  //   if (place === 1) {
+  //     // return;
+  //   }
     this.isShow = true;
     this.color = 'grey';
     console.log('id', id);
 
-    for (let data of this.places) {
-      if (data._id === id) {
-       this.websocketService.saveSelected(data).subscribe( res => {
-        this.select.push({
-          _id : res._id,
-          row: res.row,
-          place : res.place,
-          select : true,
-          bought : res.bought,
-        });
-        this.places[data._id].select = true;
-       // console.log('delete', this.places);
-      });
-   }
-  }
+    // for (let data of this.places) {
+    //   if (data._id === id) {
+    //    this.websocketService.saveSelected(data).subscribe( res => {
+    //     this.select.push({
+    //       _id : res._id,
+    //       row: res.row,
+    //       place : res.place,
+    //       select : true,
+    //       bought : res.bought,
+    //     });
+    //     this.places[data._id].select = true;
+    //    // console.log('delete', this.places);
+    //   });
+  // }
+ // }
   }
 
   delete(data: Place) {
-    this.select = this.select.filter(p => p !== data);
-    this.places[data._id].select = false;
-    if (this.select.length === 0) {
-      this.isShow = false;
-    }
-    console.log('delete', this.select);
-    console.log('delete', this.places);
+    // this.select = this.select.filter(p => p !== data);
+    // this.places[data._id].select = false;
+    // if (this.select.length === 0) {
+    //   this.isShow = false;
+    // }
+    // console.log('delete', this.select);
+    // console.log('delete', this.places);
   }
 
   getStatus(_id: any) {
-    if (this.places[_id].select) {
-      return 'selected';
-    } else if (!this.places[_id].select) {
-      return 'unselected';
-    }
+    // if (this.places[_id].select) {
+    //   return 'selected';
+    // } else if (!this.places[_id].select) {
+    //   return 'unselected';
+    // }
   }
 }
 

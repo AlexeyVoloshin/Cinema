@@ -25,15 +25,24 @@ export class WebsocketService {
   //   this.socket.emit(eventName, data);
   // }
   constructor(private socket: Socket) { }
+
   saveSelected(selected: Place) {
    return  this.socket.emit('send', selected, res => {
       console.log('res', res);
       return res;
     });
   }
-  sendSelected(id: string) {
-       return  this.socket.emit('get', id , res => res);
+  getPlaces() {
+       return  this.socket.emit('get', 0, res => {
+         console.log(res);
+       });
   }
+
+
+
+
+
+
   checkConnect()  {
     this.socket.on('connect', () => {
       console.log('Connected');
