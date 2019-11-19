@@ -17,7 +17,7 @@ h1{
   /*height: 20px;*/
   /*width: 20px;*/
   /*background-color: white;*/
-  display: flex;
+  /*display: flex;*/
   align-items: flex-start;
   margin: 0;
   padding: 0;
@@ -59,10 +59,13 @@ h1{
 .SelectedSeat{
   Flex-basis: 200px;
   align-self: center;
-  background-color: cornflowerblue;
-
-}
-.unSelectedSeat{
   background-color: gray;
+  position: relative;
+}
+.currSelectedSeat{
+  Flex-basis: 200px;
+  align-self: center;
+  background-color: cornflowerblue;
+  position: relative;
 
 }

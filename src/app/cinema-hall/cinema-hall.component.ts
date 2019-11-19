@@ -12,7 +12,7 @@ import { ApiService } from '../services/api.service';
 
 export class CinemaHallComponent implements OnInit {
   places: Place[];
- // select: Place[];
+  select: Place[];
   isShow: boolean = false;
   color = 'red';
   constructor(private placeService: PlaceService,
@@ -28,21 +28,40 @@ export class CinemaHallComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.placeAndRow();
+     // this.placeAndRow();
+    this.websocketService.getPlaces()
+      .then((data) => {
+        this.places = data;
+        console.log('data', this.places);
+        return this.places;
+      });
   }
 
  onClick(id) {
     // const id = event; // .target.innerText;
-  this.websocketService.saveSelected(id);
-   this.placeAndRow();
+
   //   console.log('place', place);
-  //   if (place === 1) {
-  //     // return;
-  //   }
+    for (let place of this.places) {
+      if (place._id === id) {
+        if (place.select) {
+          break;
+        } else {
+          this.websocketService.updateSelected(id);
+          this.select.push({
+            _id : id,
+            row : place.row,
+            place : place.place,
+            select : place.select,
+            bought : place.bought,
+          });
+          this.placeAndRow();
+        }
+      }
+    }
 
     this.isShow = true;
     this.color = 'grey';
-    console.log('id', id);
+
 
     // for (let data of this.places) {
     //   if (data._id === id) {
@@ -62,21 +81,25 @@ export class CinemaHallComponent implements OnInit {
   }
 
   delete(data: Place) {
-    // this.select = this.select.filter(p => p !== data);
+     this.select = this.select.filter(p => p !== data);
+     this.websocketService.updateSelected(data._id);
     // this.places[data._id].select = false;
-    // if (this.select.length === 0) {
-    //   this.isShow = false;
-    // }
+     if (this.select.length === 0) {
+       this.isShow = false;
+     }
     // console.log('delete', this.select);
     // console.log('delete', this.places);
   }
 
   getStatus(_id: any) {
-    for(let val of this.places) {
+    for (let val of this.places) {
       if (val.select) {
         return 'selected';
-      } else if (!val.select) {
-        return 'unselected';
+      }
+      for (let data of this.select) {
+        if (data.select) {
+          return 'currentselected';
+        }
       }
     }
   }

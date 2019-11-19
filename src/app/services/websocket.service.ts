@@ -25,7 +25,7 @@ export class WebsocketService {
   //   this.socket.emit(eventName, data);
   // }
   constructor(private socket: Socket) { }
-  saveSelected(id: string) {
+  updateSelected(id: string) {
        this.socket.emit('save', id, res => {
         console.log(res);
       });

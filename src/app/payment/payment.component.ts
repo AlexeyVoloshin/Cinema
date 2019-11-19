@@ -8,7 +8,7 @@ import {Place} from '../model/place';
 })
 export class PaymentComponent implements OnInit {
 
-  @Input() selectPlace: Array<Place>;
+  @Input() selectPlace: Place[];
   constructor() { }
 
   ngOnInit() {
