@@ -1,5 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {Place} from '../model/place';
+import {PlaceService} from '../services/place.service';
+import {WebsocketService} from '../services/websocket.service';
 
 @Component({
   selector: 'app-payment',
@@ -8,19 +10,15 @@ import {Place} from '../model/place';
 })
 export class PaymentComponent implements OnInit {
 
-  @Input() selectPlace: Place[];
-  constructor() { }
+  @Input() selectPlace: Place;
+  constructor(private placeService: PlaceService, private websocketService: WebsocketService) { }
 
   ngOnInit() {
   }
 
-  addSelected(event) {
-    console.log('selectPlace', this.selectPlace);
-
-
-  }
-
-  onSubmit(value: string, value2: string) {
-
+  onSubmit(name: string, mail: string) {
+      console.log(name + ` ${mail}` + ` you successfully paid tickets ${this.selectPlace[0].row} ${this.selectPlace[0].place}`);
+      this.websocketService.updateSelected(this.selectPlace);
+      this.placeService.postMail(name, mail, this.selectPlace);
   }
 }
