@@ -18,7 +18,9 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(name: string, mail: string) {
       console.log(name + ` ${mail}` + ` you successfully paid tickets ${this.selectPlace[0].row} ${this.selectPlace[0].place}`);
-      this.websocketService.updateSelected(this.selectPlace);
-      this.placeService.postMail(name, mail, this.selectPlace);
+      this.websocketService.boughtSelected(this.selectPlace);
+      this.selectPlace = null;
+      // this.websocketService.
+    //  this.placeService.postMail(name, mail, this.selectPlace);
   }
 }

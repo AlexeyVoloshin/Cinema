@@ -50,7 +50,7 @@ export class CinemaHallComponent implements OnInit {
             row : place.row,
             place : place.place,
             select : true,
-            bought : true,
+            bought : place.bought,
           });
         this.isShow = true;
         return;

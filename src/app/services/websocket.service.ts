@@ -15,7 +15,9 @@ export class WebsocketService {
   updateSelected(data: Place) {
        this.socket.emit('update', data );
   }
-
+  boughtSelected(data: Place) {
+    this.socket.emit('bought', data );
+  }
   getPlaces(): Promise<Place[]> {
     return new Promise<Place[]>((resolve => {
       this.socket.emit('get', 0, res => {
